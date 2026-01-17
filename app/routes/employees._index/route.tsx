@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router";
+import { Button } from "~/components/ui/button";
 import { getDB } from "~/db/getDB";
 
 export async function loader() {
@@ -12,7 +13,7 @@ export default function EmployeesPage() {
   const { employees } = useLoaderData();
   return (
     <div>
-      <h1 className="text-2xl font-bold text-blue-400">Hello Ngimdock</h1>
+      <Button>Click me</Button>
       <div>
         {employees.map((employee: any) => (
           <div>
