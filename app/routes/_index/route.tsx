@@ -1,8 +1,5 @@
 import { redirect } from "react-router";
-import { Dashboard } from "../../components/dashboard";
-import { AppSidebar } from "~/components/app-sidebar";
-import { SiteHeader } from "~/components/site-header";
-import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
+
 import { SectionCards } from "~/components/section-cards";
 
 export async function loader() {

@@ -1,6 +1,8 @@
 import { useLoaderData } from "react-router";
+import { DataTable } from "~/components/data-table";
 import { Button } from "~/components/ui/button";
 import { getDB } from "~/db/getDB";
+import data from "~/lib/data.json";
 
 export async function loader() {
   const db = await getDB();
@@ -11,30 +13,7 @@ export async function loader() {
 
 export default function EmployeesPage() {
   const { employees } = useLoaderData();
-  return (
-    <div>
-      <Button>Click me</Button>
-      <div>
-        {employees.map((employee: any) => (
-          <div>
-            <ul>
-              <li>Employee #{employee.id}</li>
-              <ul>
-                <li>Full Name: {employee.full_name}</li>
-              </ul>
-            </ul>
-          </div>
-        ))}
-      </div>
-      <hr />
-      <ul>
-        <li>
-          <a href="/employees/new">New Employee</a>
-        </li>
-        <li>
-          <a href="/timesheets/">Timesheets</a>
-        </li>
-      </ul>
-    </div>
-  );
+
+  console.log({ employees });
+  return <DataTable data={data} />;
 }

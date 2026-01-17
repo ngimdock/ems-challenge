@@ -4,8 +4,6 @@ import { SectionCards } from "~/components/section-cards";
 import { SiteHeader } from "~/components/site-header";
 import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
 
-import data from "../routes/_index/data.json";
-
 export const Dashboard = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider
