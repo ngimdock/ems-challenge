@@ -1,5 +1,9 @@
 import { redirect } from "react-router";
-import { Dashboard } from "./dashboard";
+import { Dashboard } from "../../components/dashboard";
+import { AppSidebar } from "~/components/app-sidebar";
+import { SiteHeader } from "~/components/site-header";
+import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
+import { SectionCards } from "~/components/section-cards";
 
 export async function loader() {
   // This redirects to the employees page.
@@ -9,5 +13,5 @@ export async function loader() {
 }
 
 export default function RootPage() {
-  return <Dashboard />;
+  return <SectionCards />;
 }
