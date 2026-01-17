@@ -1,17 +1,18 @@
-import { useLoaderData } from "react-router"
-import { getDB } from "~/db/getDB"
+import { useLoaderData } from "react-router";
+import { getDB } from "~/db/getDB";
 
 export async function loader() {
-  const db = await getDB()
-  const employees = await db.all("SELECT * FROM employees;")
+  const db = await getDB();
+  const employees = await db.all("SELECT * FROM employees;");
 
-  return { employees }
+  return { employees };
 }
 
 export default function EmployeesPage() {
-  const { employees } = useLoaderData()
+  const { employees } = useLoaderData();
   return (
     <div>
+      <h1 className="text-2xl font-bold text-blue-400">Hello Ngimdock</h1>
       <div>
         {employees.map((employee: any) => (
           <div>
@@ -26,9 +27,13 @@ export default function EmployeesPage() {
       </div>
       <hr />
       <ul>
-        <li><a href="/employees/new">New Employee</a></li>
-        <li><a href="/timesheets/">Timesheets</a></li>
+        <li>
+          <a href="/employees/new">New Employee</a>
+        </li>
+        <li>
+          <a href="/timesheets/">Timesheets</a>
+        </li>
       </ul>
     </div>
-  )
+  );
 }
