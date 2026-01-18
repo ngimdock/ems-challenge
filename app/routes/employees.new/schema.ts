@@ -16,16 +16,16 @@ export const EmployeeFormSchema = z.object({
       message: "Invalid phone number format.",
     }),
 
-  // date_of_birth: z.string().refine((val) => !isNaN(Date.parse(val)), {
-  //   message: "Date of birth must be a valid date.",
-  // }),
+  date_of_birth: z.string().refine((val) => !isNaN(Date.parse(val)), {
+    message: "Date of birth must be a valid date.",
+  }),
 
-  // job_title: z.string().min(2, "Job title is required."),
+  job_title: z.string().min(2, "Job title is required."),
 
   // salary: z
   //   .number()
   //   .nullable()
-  //   .optional()
+  //   // .optional()
   //   .refine((val) => !val || val >= 0, {
   //     message: "Salary must be a positive number.",
   //   }),

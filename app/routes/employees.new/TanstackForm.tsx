@@ -17,7 +17,6 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import type { p } from "node_modules/@react-router/dev/dist/routes-CZR-bKRt";
 
 export const TantackForm = () => {
   const submit = useMutation({
@@ -38,6 +37,9 @@ export const TantackForm = () => {
       full_name: "",
       email: "",
       phone: "",
+      date_of_birth: "",
+      job_title: "",
+      // salary: null,
     },
     validators: {
       onSubmit: EmployeeFormSchema,
@@ -63,7 +65,7 @@ export const TantackForm = () => {
             form.handleSubmit();
           }}
         >
-          <div className="flex items-center flex-col gap-3">
+          <div className="flex items-center flex-col gap-5">
             <form.Field
               name="full_name"
               children={(field) => {
@@ -132,6 +134,59 @@ export const TantackForm = () => {
                       onChange={(e) => field.handleChange(e.target.value)}
                       aria-invalid={isInvalid}
                       placeholder="+1234567890"
+                      autoComplete="off"
+                    />
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>
+                );
+              }}
+            />
+
+            <form.Field
+              name="date_of_birth"
+              children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
+                return (
+                  <Field data-invalid={isInvalid}>
+                    <FieldLabel htmlFor={field.name}>Date of Birth</FieldLabel>
+                    <Input
+                      type="date"
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      aria-invalid={isInvalid}
+                      placeholder="YYYY-MM-DD"
+                      autoComplete="off"
+                    />
+                    {isInvalid && (
+                      <FieldError errors={field.state.meta.errors} />
+                    )}
+                  </Field>
+                );
+              }}
+            />
+
+            <form.Field
+              name="job_title"
+              children={(field) => {
+                const isInvalid =
+                  field.state.meta.isTouched && !field.state.meta.isValid;
+                return (
+                  <Field data-invalid={isInvalid}>
+                    <FieldLabel htmlFor={field.name}>Job Titel</FieldLabel>
+                    <Input
+                      id={field.name}
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                      aria-invalid={isInvalid}
+                      placeholder="Frontend Developer"
                       autoComplete="off"
                     />
                     {isInvalid && (
