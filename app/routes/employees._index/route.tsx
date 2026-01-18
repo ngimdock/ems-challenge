@@ -1,6 +1,9 @@
 import { useLoaderData } from "react-router";
 import { getDB } from "~/db/getDB";
-import { EmployeesTable } from "./EmployeesTable";
+import { Button } from "~/components/ui/button";
+import { EmployeeHeader } from "./EmployeeHeader";
+import { EmployeeTable } from "./EmployeeTable";
+import { EmployeeFooter } from "./EmployeeFooter";
 
 export async function loader() {
   const db = await getDB();
@@ -15,8 +18,10 @@ export default function EmployeesPage() {
   console.log({ employees });
 
   return (
-    <div>
-      <EmployeesTable employeesData={employees} />
+    <div className="w-full">
+      <EmployeeHeader />
+      <EmployeeTable employeesData={employees} />
+      <EmployeeFooter />
     </div>
   );
 }
