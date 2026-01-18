@@ -8,13 +8,9 @@ export const EmployeeFormSchema = z.object({
 
   email: z.email(),
 
-  phone: z
-    .string()
-    // .nullable()
-    // .optional()
-    .refine((val) => !val || /^\+?[1-9]\d{1,14}$/.test(val), {
-      message: "Invalid phone number format.",
-    }),
+  phone: z.string().refine((val) => !val || /^\+?[1-9]\d{1,14}$/.test(val), {
+    message: "Invalid phone number format.",
+  }),
 
   date_of_birth: z.string().refine((val) => !isNaN(Date.parse(val)), {
     message: "Date of birth must be a valid date.",
@@ -22,27 +18,27 @@ export const EmployeeFormSchema = z.object({
 
   job_title: z.string().min(2, "Job title is required."),
 
-  // salary: z
-  //   .number()
-  //   .nullable()
-  //   // .optional()
-  //   .refine((val) => !val || val >= 0, {
-  //     message: "Salary must be a positive number.",
-  //   }),
+  department: z.string().min(2, "Department is required."),
 
-  // department: z.string(),
+  salary: z
+    .number()
+    // .nullable()
+    // .optional()
+    .refine((val) => !val || val >= 0, {
+      message: "Salary must be a positive number.",
+    }),
 
-  // start_date: z.string().refine((val) => !isNaN(Date.parse(val)), {
-  //   message: "Start date must be a valid date.",
-  // }),
+  start_date: z.string().refine((val) => !isNaN(Date.parse(val)), {
+    message: "Start date must be a valid date.",
+  }),
 
-  // end_date: z
-  //   .string()
-  //   .nullable()
-  //   .optional()
-  //   .refine((val) => !val || !isNaN(Date.parse(val)), {
-  //     message: "End date must be a valid date.",
-  //   }),
+  end_date: z
+    .string()
+    .nullable()
+    .optional()
+    .refine((val) => !val || !isNaN(Date.parse(val)), {
+      message: "End date must be a valid date.",
+    }),
 });
 
 export type EmployeeFormSchemaType = z.infer<typeof EmployeeFormSchema>;
