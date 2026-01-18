@@ -10,7 +10,6 @@ import {
   useReactTable,
   type ColumnDef,
   type ColumnFiltersState,
-  type SortingState,
   type VisibilityState,
 } from "@tanstack/react-table";
 import { ChevronDown, MoreHorizontal } from "lucide-react";
@@ -18,7 +17,6 @@ import { ChevronDown, MoreHorizontal } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,

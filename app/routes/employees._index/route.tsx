@@ -7,7 +7,9 @@ import { EmployeeFooter } from "./EmployeeFooter";
 
 export async function loader() {
   const db = await getDB();
-  const employees = await db.all("SELECT * FROM employees;");
+  const employees = await db.all(
+    "SELECT * FROM employees ORDER BY created_at DESC;",
+  );
 
   return { employees };
 }
