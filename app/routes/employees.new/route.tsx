@@ -1,14 +1,52 @@
 import { Form, redirect, type ActionFunction } from "react-router";
-import { getDB } from "~/db/getDB";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
+
+import {
+  Field,
+  FieldContent,
+  FieldError,
+  FieldLabel,
+} from "~/components/ui/field";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import { CreateEmployeeForm } from "./CreateEmployeeForm";
-import { TantackForm } from "./TanstackForm";
+import { getDB } from "~/db/getDB";
+import { createEmployeeQuery } from "./queries";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
+
   const full_name = formData.get("full_name");
+  const email = formData.get("email");
+  const phone = formData.get("phone");
+  const date_of_birth = formData.get("date_of_birth");
+  const job_title = formData.get("job_title");
+  const department = formData.get("department");
+  const salary = formData.get("salary");
+  const start_date = formData.get("start_date");
+  const end_date = formData.get("end_date");
+
+  console.log({ formData });
 
   const db = await getDB();
-  await db.run("INSERT INTO employees (full_name) VALUES (?)", [full_name]);
+  await db.run(createEmployeeQuery, [
+    full_name,
+    email,
+    phone || null,
+    date_of_birth,
+    job_title,
+    department,
+    salary ?? null,
+    start_date,
+    end_date,
+  ]);
 
   return redirect("/employees");
 };
@@ -16,20 +54,17 @@ export const action: ActionFunction = async ({ request }) => {
 export default function NewEmployeePage() {
   return (
     <div>
-      <TantackForm />
-      {/* <CreateEmployeeForm /> */}
-      {/* <Form method="post">
-        <div>
-          <label htmlFor="full_name">Full Name</label>
-          <input type="text" name="full_name" id="full_name" required />
-        </div>
-        <button type="submit">Create Employee</button>
-      </Form>
-      <hr />
-      <ul>
-        <li><a href="/employees">Employees</a></li>
-        <li><a href="/timesheets">Timesheets</a></li>
-      </ul> */}
+      <Card className="w-full sm:max-w-lg mx-auto mt-8">
+        <CardHeader>
+          <CardTitle>Create Employee</CardTitle>
+          <CardDescription>
+            Fill the form to create a new employee
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <CreateEmployeeForm />
+        </CardContent>
+      </Card>
     </div>
   );
 }

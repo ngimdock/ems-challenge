@@ -1,132 +1,126 @@
-"use client";
-
-import * as React from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
-import { toast } from "sonner";
-import * as z from "zod";
-
+import { Form } from "react-router";
 import { Button } from "~/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
 
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "~/components/ui/field";
+import { Field, FieldLabel } from "~/components/ui/field";
 
 import { Input } from "~/components/ui/input";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroupTextarea,
-} from "~/components/ui/input-group";
-import { Fieldset } from "~/components/Fieldset";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "~/components/ui/form";
-import { EmployeeFormSchema } from "./schema";
-
-// const formSchema = z.object({
-//   full_name: z
-//     .string()
-//     .min(5, "Bug title must be at least 5 characters.")
-//     .max(32, "Bug title must be at most 32 characters."),
-// });
+import { Typography } from "~/components/typography";
+import { DEPARTMENTS } from "~/lib/data";
 
 export function CreateEmployeeForm() {
-  const form = useForm<z.infer<typeof EmployeeFormSchema>>({
-    resolver: zodResolver(EmployeeFormSchema),
-    defaultValues: {
-      full_name: "",
-    },
-  });
-
-  function onSubmit(data: z.infer<typeof EmployeeFormSchema>) {
-    console.log({ data });
-    // toast("You submitted the following values:", {
-    //   description: (
-    //     <pre className="bg-code text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
-    //       <code>{JSON.stringify(data, null, 2)}</code>
-    //     </pre>
-    //   ),
-    //   position: "bottom-right",
-    //   classNames: {
-    //     content: "flex flex-col gap-2",
-    //   },
-    //   style: {
-    //     "--border-radius": "calc(var(--radius)  + 4px)",
-    //   } as React.CSSProperties,
-    // });
-  }
-
   return (
-    <div className="flex justify-center ">
-      <Card className="w-full sm:max-w-md">
-        <CardHeader>
-          <CardTitle>Create New Employee</CardTitle>
-          <CardDescription>
-            Fill out the form below to add a new employee to the system.
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
-            <FieldGroup>
-              <Controller
-                name="full_name"
-                control={form.control}
-                render={({ field, fieldState }) => (
-                  <Field data-invalid={fieldState.invalid}>
-                    <FieldLabel htmlFor="form-rhf-demo-title">
-                      Full Name
-                    </FieldLabel>
-                    <Input
-                      {...field}
-                      id="form-rhf-demo-title"
-                      aria-invalid={fieldState.invalid}
-                      placeholder="Enter full name"
-                      autoComplete="off"
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
-                  </Field>
-                )}
-              />
-            </FieldGroup>
-          </form>
-        </CardContent>
-        <CardFooter>
-          <Field orientation="horizontal">
-            <Button
-              type="button"
-              variant="outline"
-              onClick={() => form.reset()}
-            >
-              Reset
-            </Button>
-            <Button type="submit" form="form-rhf-demo">
-              Submit
-            </Button>
-          </Field>
-        </CardFooter>
-      </Card>
-    </div>
+    <Form method="post" className="flex  flex-col gap-5 max-w-lg mx-auto">
+      <Field>
+        <FieldLabel htmlFor="full_name">Full Name</FieldLabel>
+        <Input
+          type="text"
+          id="full_name"
+          name="full_name"
+          placeholder="John Doe"
+          autoComplete="off"
+          required
+        />
+      </Field>
+
+      <Field>
+        <FieldLabel htmlFor="email">Email</FieldLabel>
+        <Input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="monemail@gmail.com"
+          autoComplete="off"
+          required
+        />
+      </Field>
+
+      <Field>
+        <FieldLabel htmlFor="date_of_birth">Date of Birth</FieldLabel>
+        <Input
+          type="date"
+          id="date_of_birth"
+          name="date_of_birth"
+          placeholder="1990-01-01"
+          autoComplete="off"
+          required
+        />
+      </Field>
+
+      <Field>
+        <FieldLabel htmlFor="job_title">Job Title</FieldLabel>
+        <Input
+          type="text"
+          id="job_title"
+          name="job_title"
+          placeholder="Software Engineer"
+          autoComplete="off"
+          required
+        />
+      </Field>
+
+      <Field>
+        <FieldLabel htmlFor="salary">Salary</FieldLabel>
+        <Input
+          type="number"
+          id="salary"
+          name="salary"
+          placeholder="50000"
+          autoComplete="off"
+          required
+        />
+      </Field>
+
+      <Field>
+        <FieldLabel htmlFor="start_date">Start Date</FieldLabel>
+        <Input
+          type="date"
+          id="start_date"
+          name="start_date"
+          placeholder="1990-01-01"
+          autoComplete="off"
+          required
+        />
+      </Field>
+
+      {/* <Field className="relative">
+              <FieldLabel htmlFor="department">Department</FieldLabel>
+              <Select name="department" required disabled={false}>
+                <SelectTrigger id="department">
+                  <SelectValue placeholder="Select a department" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    {Object.keys(DEPARTMENTS).map((dept) => (
+                      <SelectItem key={dept} value={dept}>
+                        {dept}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </Field> */}
+
+      <Field>
+        <FieldLabel htmlFor="department">Department</FieldLabel>
+        <select
+          name="department"
+          id="department"
+          className="border-accent border-2 rounded-md px-3 py-2 w-full"
+        >
+          <option value="">
+            <Typography className="text-sm">
+              --Veuillez choisir une option--
+            </Typography>
+          </option>
+          {Object.keys(DEPARTMENTS).map((dept) => (
+            <option key={dept} value={dept}>
+              {dept}
+            </option>
+          ))}
+        </select>
+      </Field>
+
+      <Button type="submit">Create Employee</Button>
+    </Form>
   );
 }

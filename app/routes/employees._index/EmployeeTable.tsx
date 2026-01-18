@@ -32,7 +32,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import type { EmployeeType } from "../employees.new/schema";
+import type { EmployeeType } from "./types";
 
 export const columns: ColumnDef<EmployeeType>[] = [
   {
