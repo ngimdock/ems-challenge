@@ -17,11 +17,5 @@ export default function EmployeePage() {
 
   console.log({ employee });
 
-  return (
-    <div>
-      <div>{employee?.full_name}</div>
-
-      <ProfileSection />
-    </div>
-  );
+  return <ProfileSection employee={employee} />;
 }

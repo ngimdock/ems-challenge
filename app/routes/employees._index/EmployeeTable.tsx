@@ -31,7 +31,7 @@ import {
   TableRow,
 } from "~/components/ui/table";
 import type { EmployeeType } from "./types";
-import { redirect } from "react-router";
+import { Link, redirect } from "react-router";
 
 export const columns: ColumnDef<EmployeeType>[] = [
   {
@@ -155,14 +155,18 @@ export const EmployeeTable = ({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                onClick={() => {
-                  // redirect to /employeeId
-                  redirect(`/employees/${row.original.id}`);
-                }}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    <Link
+                      to={row.original.id + ""}
+                      // className="p-1 bg-red-300 inline-block"
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </Link>
                   </TableCell>
                 ))}
               </TableRow>
