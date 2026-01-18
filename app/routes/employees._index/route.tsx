@@ -15,7 +15,7 @@ export async function loader() {
 }
 
 export default function EmployeesPage() {
-  const { employees } = useLoaderData<typeof loader>();
+  const { employees } = useLoaderData();
 
   console.log({ employees });
 

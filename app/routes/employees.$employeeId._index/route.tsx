@@ -1,28 +1,27 @@
-import { useParams } from "react-router";
+import { useLoaderData } from "react-router";
+import { getDB } from "~/db/getDB";
+import ProfileSection from "./ProfileSection";
 
-export async function loader() {
-  return {};
+export async function loader({ params }: { params: { employeeId: string } }) {
+  const db = await getDB();
+  const employee = await db.get(
+    "SELECT * FROM employees WHERE id = ?;",
+    params.employeeId,
+  );
+
+  return { employee };
 }
 
 export default function EmployeePage() {
-  const params = useParams();
+  const { employee } = useLoaderData();
 
-  console.log({ params });
+  console.log({ employee });
 
   return (
     <div>
-      <div>To implement</div>
-      <ul>
-        <li>
-          <a href="/employees">Employees</a>
-        </li>
-        <li>
-          <a href="/employees/new">New Employee</a>
-        </li>
-        <li>
-          <a href="/timesheets/">Timesheets</a>
-        </li>
-      </ul>
+      <div>{employee?.full_name}</div>
+
+      <ProfileSection />
     </div>
   );
 }

@@ -12,7 +12,7 @@ import {
   type ColumnFiltersState,
   type VisibilityState,
 } from "@tanstack/react-table";
-import { ChevronDown, MoreHorizontal } from "lucide-react";
+import { MoreHorizontal } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
 import {
@@ -31,6 +31,7 @@ import {
   TableRow,
 } from "~/components/ui/table";
 import type { EmployeeType } from "./types";
+import { redirect } from "react-router";
 
 export const columns: ColumnDef<EmployeeType>[] = [
   {
@@ -154,6 +155,10 @@ export const EmployeeTable = ({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                onClick={() => {
+                  // redirect to /employeeId
+                  redirect(`/employees/${row.original.id}`);
+                }}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
