@@ -1,6 +1,7 @@
 import { Form, redirect, type ActionFunction } from "react-router";
 import { getDB } from "~/db/getDB";
 import { CreateEmployeeForm } from "./CreateEmployeeForm";
+import { TantackForm } from "./TanstackForm";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -15,7 +16,8 @@ export const action: ActionFunction = async ({ request }) => {
 export default function NewEmployeePage() {
   return (
     <div>
-      <CreateEmployeeForm />
+      <TantackForm />
+      {/* <CreateEmployeeForm /> */}
       {/* <Form method="post">
         <div>
           <label htmlFor="full_name">Full Name</label>

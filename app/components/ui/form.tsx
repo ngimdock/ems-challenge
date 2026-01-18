@@ -1,31 +1,86 @@
-import * as React from "react"
-import type * as LabelPrimitive from "@radix-ui/react-label"
-import { Slot } from "@radix-ui/react-slot"
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+"use client";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import type * as LabelPrimitive from "@radix-ui/react-label";
+import { Slot } from "@radix-ui/react-slot";
+import * as React from "react";
+import type {
+  SubmitHandler,
+  UseFormProps,
+  UseFormReturn,
+} from "react-hook-form";
 import {
   Controller,
   FormProvider,
+  useForm,
   useFormContext,
   useFormState,
   type ControllerProps,
   type FieldPath,
   type FieldValues,
-} from "react-hook-form"
+} from "react-hook-form";
+import type * as z from "zod";
+import { cn } from "~/lib/utils";
+import { Label } from "./label";
+import { useDebounceFn } from "~/hooks/use-debounde";
 
-import { cn } from "~/lib/utils"
-import { Label } from "~/components/ui/label"
+export type FormProps<T extends FieldValues> = Omit<
+  React.ComponentProps<"form">,
+  "onSubmit"
+> & {
+  form: UseFormReturn<T>;
+  onSubmit: SubmitHandler<T>;
+  disabled?: boolean;
+  submitOnBlur?: boolean;
+};
 
-const Form = FormProvider
+const Form = <T extends FieldValues>({
+  form,
+  onSubmit,
+  children,
+  className,
+  disabled,
+  submitOnBlur = false,
+  ...props
+}: FormProps<T>) => {
+  const debouncedBlurSubmit = useDebounceFn(() => {
+    void form.handleSubmit(onSubmit)();
+  }, 500);
+
+  return (
+    <FormProvider {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        onBlur={async () => {
+          if (submitOnBlur) {
+            debouncedBlurSubmit();
+          }
+        }}
+        {...props}
+        className={className}
+      >
+        <fieldset
+          disabled={disabled ?? form.formState.isSubmitting}
+          className={className}
+        >
+          {children}
+        </fieldset>
+      </form>
+    </FormProvider>
+  );
+};
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = {
-  name: TName
-}
+  name: TName;
+};
 
 const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue
-)
+  {} as FormFieldContextValue,
+);
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
@@ -37,21 +92,21 @@ const FormField = <
     <FormFieldContext.Provider value={{ name: props.name }}>
       <Controller {...props} />
     </FormFieldContext.Provider>
-  )
-}
+  );
+};
 
 const useFormField = () => {
-  const fieldContext = React.useContext(FormFieldContext)
-  const itemContext = React.useContext(FormItemContext)
-  const { getFieldState } = useFormContext()
-  const formState = useFormState({ name: fieldContext.name })
-  const fieldState = getFieldState(fieldContext.name, formState)
+  const fieldContext = React.useContext(FormFieldContext);
+  const itemContext = React.useContext(FormItemContext);
+  const { getFieldState } = useFormContext();
+  const formState = useFormState({ name: fieldContext.name });
+  const fieldState = getFieldState(fieldContext.name, formState);
 
   if (!fieldContext) {
-    throw new Error("useFormField should be used within <FormField>")
+    throw new Error("useFormField should be used within <FormField>");
   }
 
-  const { id } = itemContext
+  const { id } = itemContext;
 
   return {
     id,
@@ -60,19 +115,19 @@ const useFormField = () => {
     formDescriptionId: `${id}-form-item-description`,
     formMessageId: `${id}-form-item-message`,
     ...fieldState,
-  }
-}
+  };
+};
 
 type FormItemContextValue = {
-  id: string
-}
+  id: string;
+};
 
 const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue
-)
+  {} as FormItemContextValue,
+);
 
 function FormItem({ className, ...props }: React.ComponentProps<"div">) {
-  const id = React.useId()
+  const id = React.useId();
 
   return (
     <FormItemContext.Provider value={{ id }}>
@@ -82,14 +137,14 @@ function FormItem({ className, ...props }: React.ComponentProps<"div">) {
         {...props}
       />
     </FormItemContext.Provider>
-  )
+  );
 }
 
 function FormLabel({
   className,
   ...props
 }: React.ComponentProps<typeof LabelPrimitive.Root>) {
-  const { error, formItemId } = useFormField()
+  const { error, formItemId } = useFormField();
 
   return (
     <Label
@@ -99,11 +154,12 @@ function FormLabel({
       htmlFor={formItemId}
       {...props}
     />
-  )
+  );
 }
 
 function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
-  const { error, formItemId, formDescriptionId, formMessageId } = useFormField()
+  const { error, formItemId, formDescriptionId, formMessageId } =
+    useFormField();
 
   return (
     <Slot
@@ -117,11 +173,11 @@ function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
       aria-invalid={!!error}
       {...props}
     />
-  )
+  );
 }
 
 function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
-  const { formDescriptionId } = useFormField()
+  const { formDescriptionId } = useFormField();
 
   return (
     <p
@@ -130,15 +186,15 @@ function FormDescription({ className, ...props }: React.ComponentProps<"p">) {
       className={cn("text-muted-foreground text-sm", className)}
       {...props}
     />
-  )
+  );
 }
 
 function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
-  const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message ?? "") : props.children
+  const { error, formMessageId } = useFormField();
+  const body = error ? String(error.message ?? "") : props.children;
 
   if (!body) {
-    return null
+    return null;
   }
 
   return (
@@ -150,16 +206,38 @@ function FormMessage({ className, ...props }: React.ComponentProps<"p">) {
     >
       {body}
     </p>
-  )
+  );
 }
 
+type UseZodFormProps<
+  Input extends FieldValues,
+  Output extends FieldValues,
+  Z extends z.ZodType<Output, Input>,
+> = Exclude<UseFormProps<z.output<Z>>, "resolver"> & {
+  schema: Z;
+};
+
+const useZodForm = <
+  Input extends FieldValues,
+  Output extends FieldValues,
+  Z extends z.ZodType<Output, Input>,
+>({
+  schema,
+  ...formProps
+}: UseZodFormProps<Input, Output, Z>) =>
+  useForm({
+    ...formProps,
+    resolver: zodResolver(schema) as never,
+  });
+
 export {
-  useFormField,
   Form,
-  FormItem,
-  FormLabel,
   FormControl,
   FormDescription,
-  FormMessage,
   FormField,
-}
+  FormItem,
+  FormLabel,
+  FormMessage,
+  useFormField,
+  useZodForm,
+};

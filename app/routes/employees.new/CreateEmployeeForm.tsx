@@ -41,7 +41,7 @@ import {
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
-import { employeeFormSchema } from "./schema";
+import { EmployeeFormSchema } from "./schema";
 
 // const formSchema = z.object({
 //   full_name: z
@@ -51,14 +51,14 @@ import { employeeFormSchema } from "./schema";
 // });
 
 export function CreateEmployeeForm() {
-  const form = useForm<z.infer<typeof employeeFormSchema>>({
-    resolver: zodResolver(employeeFormSchema),
+  const form = useForm<z.infer<typeof EmployeeFormSchema>>({
+    resolver: zodResolver(EmployeeFormSchema),
     defaultValues: {
       full_name: "",
     },
   });
 
-  function onSubmit(data: z.infer<typeof employeeFormSchema>) {
+  function onSubmit(data: z.infer<typeof EmployeeFormSchema>) {
     console.log({ data });
     // toast("You submitted the following values:", {
     //   description: (
