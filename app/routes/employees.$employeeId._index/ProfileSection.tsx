@@ -30,13 +30,6 @@ export default function ProfileSection({ employee }: ProfileSectionProps) {
                 {getAvatarPlaceholder(full_name)}
               </AvatarFallback>
             </Avatar>
-            <Button
-              size="icon"
-              variant="outline"
-              className="absolute -right-2 -bottom-2 h-8 w-8 rounded-full"
-            >
-              <Camera />
-            </Button>
           </div>
           <div className="flex-1 space-y-2">
             <div className="flex flex-col gap-2 md:flex-row md:items-center">

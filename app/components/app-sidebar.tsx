@@ -18,14 +18,8 @@ import {
   SidebarMenuItem,
 } from "~/components/ui/sidebar";
 import { Link } from "react-router";
-import { routeLinks } from "~/lib/routes-links";
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       title: "Dashboard",
@@ -34,12 +28,12 @@ const data = {
     },
     {
       title: "Employees",
-      url: routeLinks.employees,
+      url: "employees",
       icon: IconUsers,
     },
     {
       title: "Timesheets",
-      url: routeLinks.timesheets,
+      url: "timesheets",
       icon: IconListDetails,
     },
   ],
@@ -66,9 +60,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavMain items={data.navMain} />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
     </Sidebar>
   );
 }

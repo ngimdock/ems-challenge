@@ -1,14 +1,10 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "~/components/ui/card";
+import { Card, CardContent, CardHeader } from "~/components/ui/card";
 import type { TimesheetWithEmployee } from "../timesheets._index/types";
 import { Separator } from "~/components/ui/separator";
 import { Button } from "~/components/ui/button";
 import { formatDateEN } from "~/lib/utils";
+import { Badge } from "~/components/ui/badge";
+import { Typography } from "~/components/typography";
 
 type TimesheetDetailsProps = {
   timesheet: TimesheetWithEmployee;
@@ -22,18 +18,25 @@ export function TimesheetDetails({ timesheet, onEdit }: TimesheetDetailsProps) {
     <Card className="max-w-xl mx-auto">
       <CardHeader className="space-y-1">
         <h2 className="text-xl font-semibold">{employee_name}</h2>
-        <p className="text-sm text-muted-foreground">{employee_department}</p>
+
+        <Badge variant="secondary">{employee_department}</Badge>
       </CardHeader>
 
       <CardContent className="space-y-6">
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div>
-            <p className="text-muted-foreground">Start time</p>
-            <p className="font-medium">{formatDateEN(start_time)}</p>
+            <Typography className="text-muted-foreground">
+              Start time
+            </Typography>
+            <Typography className="font-medium">
+              {formatDateEN(start_time)}
+            </Typography>
           </div>
           <div>
-            <p className="text-muted-foreground">End time</p>
-            <p className="font-medium">{formatDateEN(end_time)}</p>
+            <Typography className="text-muted-foreground">End time</Typography>
+            <Typography className="font-medium">
+              {formatDateEN(end_time)}
+            </Typography>
           </div>
         </div>
 
