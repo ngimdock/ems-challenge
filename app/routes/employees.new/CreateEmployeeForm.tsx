@@ -108,9 +108,7 @@ export function CreateEmployeeForm() {
           className="border-accent border-2 rounded-md px-3 py-2 w-full"
         >
           <option value="">
-            <Typography className="text-sm">
-              --Veuillez choisir une option--
-            </Typography>
+            <Typography className="text-sm">--Choose a department--</Typography>
           </option>
           {Object.keys(DEPARTMENTS).map((dept) => (
             <option key={dept} value={dept}>

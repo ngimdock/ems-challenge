@@ -15,9 +15,9 @@ export const TimesheetHeader = () => {
         className="max-w-sm"
       />
 
-      <Link to="/employees/new" className="ml-2 inline-block">
+      <Link to="/timesheets/new" className="ml-2 inline-block">
         <Button variant="outline" className="ml-auto">
-          <Plus className="h-4 w-4" /> Add Employee
+          <Plus className="h-4 w-4" /> Create Timesheet
         </Button>
       </Link>
     </div>

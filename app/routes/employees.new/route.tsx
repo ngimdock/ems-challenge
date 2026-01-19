@@ -49,7 +49,7 @@ export default function NewEmployeePage() {
         <CardHeader>
           <CardTitle>Create Employee</CardTitle>
           <CardDescription>
-            Fill the form to create a new employee
+            Fill out the form below to create a new employee.
           </CardDescription>
         </CardHeader>
         <CardContent>
