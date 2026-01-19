@@ -5,6 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Camera, Calendar, Mail, MapPin, DollarSign } from "lucide-react";
 import type { EmployeeType } from "../employees._index/types";
 import { formatDateEN, getAvatarPlaceholder } from "~/lib/utils";
+import { Link } from "react-router";
 
 type ProfileSectionProps = {
   employee: EmployeeType;
@@ -53,7 +54,9 @@ export default function ProfileSection({ employee }: ProfileSectionProps) {
               </div>
             </div>
           </div>
-          <Button variant="default">Edit Profile</Button>
+          <Link to={`/employees/${employee.id}/edit`}>
+            <Button variant="default">Edit Profile</Button>
+          </Link>
         </div>
       </CardContent>
     </Card>

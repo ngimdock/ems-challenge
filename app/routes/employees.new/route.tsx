@@ -7,35 +7,27 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { CreateEmployeeForm } from "./CreateEmployeeForm";
+import { CreateAndUpdateEmployeeForm } from "./CreateAndUpdateEmployeeForm";
 import { getDB } from "~/db/getDB";
 import { createEmployeeQuery } from "./queries";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
 
-  const full_name = formData.get("full_name");
-  const email = formData.get("email");
-  const phone = formData.get("phone");
-  const date_of_birth = formData.get("date_of_birth");
-  const job_title = formData.get("job_title");
-  const department = formData.get("department");
-  const salary = formData.get("salary");
-  const start_date = formData.get("start_date");
-  const end_date = formData.get("end_date");
+  const employeePayload = [
+    formData.get("full_name"),
+    formData.get("email"),
+    formData.get("phone") || null,
+    formData.get("date_of_birth"),
+    formData.get("job_title"),
+    formData.get("department"),
+    formData.get("salary") ?? null,
+    formData.get("start_date"),
+    formData.get("end_date"),
+  ];
 
   const db = await getDB();
-  await db.run(createEmployeeQuery, [
-    full_name,
-    email,
-    phone || null,
-    date_of_birth,
-    job_title,
-    department,
-    salary ?? null,
-    start_date,
-    end_date,
-  ]);
+  await db.run(createEmployeeQuery, employeePayload);
 
   return redirect("/employees");
 };
@@ -51,7 +43,7 @@ export default function NewEmployeePage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <CreateEmployeeForm />
+          <CreateAndUpdateEmployeeForm />
         </CardContent>
       </Card>
     </div>
