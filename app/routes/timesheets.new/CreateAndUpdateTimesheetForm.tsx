@@ -5,12 +5,17 @@ import { Field, FieldLabel } from "~/components/ui/field";
 
 import { Input } from "~/components/ui/input";
 import { Typography } from "~/components/typography";
+import type { TimesheetType } from "../timesheets._index/types";
 
-type CreateTimesheetFormProps = {
+type CreateAndUpdateTimesheetFormProps = {
   employees: Array<{ id: string; full_name: string }>;
+  timeSheet?: TimesheetType;
 };
 
-export function CreateTimesheetForm({ employees }: CreateTimesheetFormProps) {
+export function CreateAndUpdateTimesheetForm({
+  employees,
+  timeSheet,
+}: CreateAndUpdateTimesheetFormProps) {
   return (
     <Form method="post" className="flex  flex-col gap-5 max-w-lg mx-auto">
       <Field>
@@ -19,6 +24,8 @@ export function CreateTimesheetForm({ employees }: CreateTimesheetFormProps) {
           name="employee_id"
           id="employee_id"
           className="border-accent border-2 rounded-md px-3 py-2 w-full"
+          required
+          defaultValue={timeSheet?.employee_id}
         >
           <option value="">
             <Typography className="text-sm">--Choose an employee--</Typography>
@@ -40,6 +47,7 @@ export function CreateTimesheetForm({ employees }: CreateTimesheetFormProps) {
           placeholder="1990-01-01"
           autoComplete="off"
           required
+          defaultValue={timeSheet?.start_time}
         />
       </Field>
 
@@ -52,6 +60,7 @@ export function CreateTimesheetForm({ employees }: CreateTimesheetFormProps) {
           placeholder="1990-01-01"
           autoComplete="off"
           required
+          defaultValue={timeSheet?.end_time}
         />
       </Field>
 
@@ -64,10 +73,13 @@ export function CreateTimesheetForm({ employees }: CreateTimesheetFormProps) {
           placeholder="Worked on employee management feature..."
           autoComplete="off"
           required={false}
+          defaultValue={timeSheet?.summary || ""}
         />
       </Field>
 
-      <Button type="submit">Create Timesheet</Button>
+      <Button type="submit">
+        {timeSheet ? "Update Timesheet" : "Create Timesheet"}
+      </Button>
     </Form>
   );
 }

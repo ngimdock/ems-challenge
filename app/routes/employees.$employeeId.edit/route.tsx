@@ -16,8 +16,6 @@ export const action: ActionFunction = async ({ request }) => {
 
   const employeeId = new URL(request.url).pathname.split("/")[2];
 
-  console.log({ employeeId, formData });
-
   const employeePayload = [
     formData.get("full_name"),
     formData.get("email"),

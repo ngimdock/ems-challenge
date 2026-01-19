@@ -15,21 +15,6 @@ type CreateEmployeeFormProps = {
 export function CreateAndUpdateEmployeeForm({
   employee,
 }: CreateEmployeeFormProps) {
-  // set default values if employee is provided (for update form)
-  const defaultValues = employee
-    ? {
-        full_name: employee.full_name,
-        email: employee.email,
-        phone: employee.phone,
-        date_of_birth: employee.date_of_birth,
-        job_title: employee.job_title,
-        department: employee.department,
-        salary: employee.salary,
-        start_date: employee.start_date,
-        end_date: employee.end_date,
-      }
-    : null;
-
   return (
     <Form method="post" className="flex  flex-col gap-5 max-w-lg mx-auto">
       <Field>
@@ -41,7 +26,7 @@ export function CreateAndUpdateEmployeeForm({
           placeholder="John Doe"
           autoComplete="off"
           required
-          defaultValue={defaultValues?.full_name}
+          defaultValue={employee?.full_name}
         />
       </Field>
 
@@ -54,7 +39,7 @@ export function CreateAndUpdateEmployeeForm({
           placeholder="monemail@gmail.com"
           autoComplete="off"
           required
-          defaultValue={defaultValues?.email}
+          defaultValue={employee?.email}
         />
       </Field>
 
@@ -67,7 +52,7 @@ export function CreateAndUpdateEmployeeForm({
           placeholder="1990-01-01"
           autoComplete="off"
           required
-          defaultValue={defaultValues?.date_of_birth}
+          defaultValue={employee?.date_of_birth}
         />
       </Field>
 
@@ -80,7 +65,7 @@ export function CreateAndUpdateEmployeeForm({
           placeholder="Software Engineer"
           autoComplete="off"
           required
-          defaultValue={defaultValues?.job_title}
+          defaultValue={employee?.job_title}
         />
       </Field>
 
@@ -93,7 +78,7 @@ export function CreateAndUpdateEmployeeForm({
           placeholder="50000"
           autoComplete="off"
           required
-          defaultValue={defaultValues?.salary ?? undefined}
+          defaultValue={employee?.salary ?? undefined}
         />
       </Field>
 
@@ -106,7 +91,7 @@ export function CreateAndUpdateEmployeeForm({
           placeholder="1990-01-01"
           autoComplete="off"
           required
-          defaultValue={defaultValues?.start_date}
+          defaultValue={employee?.start_date}
         />
       </Field>
 
@@ -116,7 +101,7 @@ export function CreateAndUpdateEmployeeForm({
           name="department"
           id="department"
           className="border-accent border-2 rounded-md px-3 py-2 w-full"
-          defaultValue={defaultValues?.department || ""}
+          defaultValue={employee?.department || ""}
           required
         >
           <option value="">

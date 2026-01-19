@@ -5,13 +5,13 @@ import { Button } from "~/components/ui/button";
 import { formatDateEN } from "~/lib/utils";
 import { Badge } from "~/components/ui/badge";
 import { Typography } from "~/components/typography";
+import { Link } from "react-router";
 
 type TimesheetDetailsProps = {
   timesheet: TimesheetWithEmployee;
-  onEdit: () => void;
 };
 
-export function TimesheetDetails({ timesheet, onEdit }: TimesheetDetailsProps) {
+export function TimesheetDetails({ timesheet }: TimesheetDetailsProps) {
   const { employee_name, employee_department, start_time, end_time, summary } =
     timesheet;
   return (
@@ -50,7 +50,9 @@ export function TimesheetDetails({ timesheet, onEdit }: TimesheetDetailsProps) {
         <Separator />
 
         <div className="flex justify-end">
-          <Button onClick={onEdit}>Edit timesheet</Button>
+          <Link to={`/timesheets/${timesheet.id}/edit`}>
+            <Button>Edit timesheet</Button>
+          </Link>
         </div>
       </CardContent>
     </Card>

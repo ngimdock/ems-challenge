@@ -9,48 +9,57 @@ import {
 } from "~/components/ui/card";
 
 import type { ActionFunction } from "react-router";
-import { createTimesheetQuery } from "./queries";
-import { CreateAndUpdateTimesheetForm } from "./CreateAndUpdateTimesheetForm";
+import { updateTimesheetQuery } from "./queries";
+import { CreateAndUpdateTimesheetForm } from "../timesheets.new/CreateAndUpdateTimesheetForm";
 
 export const action: ActionFunction = async ({ request }) => {
+  const timesheetId = new URL(request.url).pathname.split("/")[2];
+
   const formData = await request.formData();
 
   const db = await getDB();
-
-  const createTimesheetPayload = [
+  await db.run(updateTimesheetQuery, [
     formData.get("employee_id"),
     formData.get("start_time"),
     formData.get("end_time"),
     formData.get("summary"),
-  ];
+    timesheetId,
+  ]);
 
-  await db.run(createTimesheetQuery, createTimesheetPayload);
-
-  return redirect("/timesheets");
+  return redirect(`/timesheets/${timesheetId}`);
 };
 
-export async function loader() {
+export async function loader({ params }: { params: { timesheetId: string } }) {
   const db = await getDB();
   const employees = await db.all(
     "SELECT id, full_name FROM employees ORDER BY created_at DESC",
   );
-  return { employees };
+
+  const timeSheet = await db.get(
+    "SELECT * FROM timesheets WHERE id = ?;",
+    params.timesheetId,
+  );
+
+  return { employees, timeSheet };
 }
 
 export default function NewTimesheetPage() {
-  const { employees } = useLoaderData();
+  const { employees, timeSheet } = useLoaderData();
 
   return (
     <div>
       <Card className="w-full sm:max-w-lg mx-auto mt-8">
         <CardHeader>
-          <CardTitle>Create Timesheet</CardTitle>
+          <CardTitle>Update Timesheet</CardTitle>
           <CardDescription>
-            Fill out the form below to create a new timesheet.
+            Fill out the form below to update a timesheet.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <CreateAndUpdateTimesheetForm employees={employees} />
+          <CreateAndUpdateTimesheetForm
+            employees={employees}
+            timeSheet={timeSheet}
+          />
         </CardContent>
       </Card>
     </div>

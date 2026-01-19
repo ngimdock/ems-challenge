@@ -18,7 +18,7 @@ export default function TimesheetPage() {
 
   return (
     <div>
-      <TimesheetDetails timesheet={loaderData.timesheet} onEdit={() => {}} />
+      <TimesheetDetails timesheet={loaderData.timesheet} />
     </div>
   );
 }
