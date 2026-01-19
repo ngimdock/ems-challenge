@@ -21,13 +21,6 @@ export const Dashboard = ({ children }: { children: React.ReactNode }) => {
           <div className="@container/main flex flex-1 flex-col gap-2 p-6">
             {children}
           </div>
-          {/* <div className="@container/main flex flex-1 flex-col gap-2">
-            <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
-              <SectionCards />
-
-              <DataTable data={data} />
-            </div>
-          </div> */}
         </div>
       </SidebarInset>
     </SidebarProvider>

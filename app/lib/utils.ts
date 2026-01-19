@@ -5,6 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+export const DEFAULT_LIMIT = 5;
+
 export function getAvatarPlaceholder(name: string): string {
   if (!name) return "";
 
