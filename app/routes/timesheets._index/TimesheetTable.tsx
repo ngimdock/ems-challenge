@@ -12,16 +12,7 @@ import {
   type ColumnFiltersState,
   type VisibilityState,
 } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
 
-import { Button } from "~/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -34,44 +25,13 @@ import { Link } from "react-router";
 import type { TimesheetWithEmployee } from "./types";
 import { formatDateEN } from "~/lib/utils";
 
-export const columns: ColumnDef<TimesheetWithEmployee>[] = [
-  {
-    accessorKey: "employee_name",
-    header: "Employee Name",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("employee_name")}</div>
-    ),
-  },
-  {
-    accessorKey: "start_time",
-    header: "Start Time",
-    cell: ({ row }) => (
-      <div className="lowercase">
-        {formatDateEN(row.getValue("start_time"))}
-      </div>
-    ),
-  },
-  {
-    accessorKey: "end_time",
-    header: "End Time",
-    cell: ({ row }) => (
-      <div className="capitalize">{formatDateEN(row.getValue("end_time"))}</div>
-    ),
-  },
-  {
-    accessorKey: "employee_department",
-    header: "Department",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("employee_department")}</div>
-    ),
-  },
-];
+type TimesheetTableProps = {
+  timesheetWithEmployee: TimesheetWithEmployee[];
+};
 
 export const TimesheetTable = ({
   timesheetWithEmployee,
-}: {
-  timesheetWithEmployee: TimesheetWithEmployee[];
-}) => {
+}: TimesheetTableProps) => {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     [],
   );
@@ -151,3 +111,36 @@ export const TimesheetTable = ({
     </div>
   );
 };
+
+export const columns: ColumnDef<TimesheetWithEmployee>[] = [
+  {
+    accessorKey: "employee_name",
+    header: "Employee Name",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("employee_name")}</div>
+    ),
+  },
+  {
+    accessorKey: "start_time",
+    header: "Start Time",
+    cell: ({ row }) => (
+      <div className="lowercase">
+        {formatDateEN(row.getValue("start_time"))}
+      </div>
+    ),
+  },
+  {
+    accessorKey: "end_time",
+    header: "End Time",
+    cell: ({ row }) => (
+      <div className="capitalize">{formatDateEN(row.getValue("end_time"))}</div>
+    ),
+  },
+  {
+    accessorKey: "employee_department",
+    header: "Department",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("employee_department")}</div>
+    ),
+  },
+];
