@@ -4,10 +4,11 @@ import { Badge } from "~/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Camera, Calendar, Mail, MapPin, DollarSign } from "lucide-react";
 import type { EmployeeType } from "../employees._index/types";
-import { formatDateFR, getAvatarPlaceholder } from "~/lib/utils";
+import { formatDateEN, getAvatarPlaceholder } from "~/lib/utils";
 
 type ProfileSectionProps = {
   employee: EmployeeType;
+  onEdit: () => void;
 };
 
 export default function ProfileSection({ employee }: ProfileSectionProps) {
@@ -55,7 +56,7 @@ export default function ProfileSection({ employee }: ProfileSectionProps) {
               <div className="flex items-center gap-1">
                 <Calendar className="size-4" />
 
-                {formatDateFR(start_date)}
+                {formatDateEN(start_date)}
               </div>
             </div>
           </div>

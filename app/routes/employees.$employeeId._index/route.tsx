@@ -15,5 +15,5 @@ export async function loader({ params }: { params: { employeeId: string } }) {
 export default function EmployeePage() {
   const { employee } = useLoaderData();
 
-  return <ProfileSection employee={employee} />;
+  return <ProfileSection employee={employee} onEdit={() => {}} />;
 }

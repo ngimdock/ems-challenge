@@ -24,8 +24,6 @@ export const action: ActionFunction = async ({ request }) => {
   const start_date = formData.get("start_date");
   const end_date = formData.get("end_date");
 
-  console.log({ formData });
-
   const db = await getDB();
   await db.run(createEmployeeQuery, [
     full_name,

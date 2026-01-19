@@ -1,6 +1,5 @@
 import { useLoaderData } from "react-router";
 import { getDB } from "~/db/getDB";
-import { Button } from "~/components/ui/button";
 import { EmployeeHeader } from "./EmployeeHeader";
 import { EmployeeTable } from "./EmployeeTable";
 import { EmployeeFooter } from "./EmployeeFooter";
@@ -16,8 +15,6 @@ export async function loader() {
 
 export default function EmployeesPage() {
   const { employees } = useLoaderData();
-
-  console.log({ employees });
 
   return (
     <div className="w-full">

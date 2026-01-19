@@ -1,18 +1,24 @@
-export async function loader() {
-  return {}
+import { getDB } from "~/db/getDB";
+import { findTimesheetWithEmployeeQuery } from "./queries";
+import { TimesheetDetails } from "./TimesheetDetail";
+import { useLoaderData } from "react-router";
+
+export async function loader({ params }: { params: { timesheetId: string } }) {
+  const db = await getDB();
+  const timesheet = await db.get(
+    findTimesheetWithEmployeeQuery,
+    params.timesheetId,
+  );
+
+  return { timesheet };
 }
 
 export default function TimesheetPage() {
+  const loaderData = useLoaderData();
+
   return (
     <div>
-      <div>
-        To implement
-      </div>
-      <ul>
-        <li><a href="/timesheets">Timesheets</a></li>
-        <li><a href="/timesheets/new">New Timesheet</a></li>
-        <li><a href="/employees/">Employees</a></li>
-      </ul>
+      <TimesheetDetails timesheet={loaderData.timesheet} onEdit={() => {}} />
     </div>
-  )
+  );
 }

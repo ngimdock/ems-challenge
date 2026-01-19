@@ -82,24 +82,6 @@ export function CreateEmployeeForm() {
         />
       </Field>
 
-      {/* <Field className="relative">
-              <FieldLabel htmlFor="department">Department</FieldLabel>
-              <Select name="department" required disabled={false}>
-                <SelectTrigger id="department">
-                  <SelectValue placeholder="Select a department" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    {Object.keys(DEPARTMENTS).map((dept) => (
-                      <SelectItem key={dept} value={dept}>
-                        {dept}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </Field> */}
-
       <Field>
         <FieldLabel htmlFor="department">Department</FieldLabel>
         <select

@@ -16,8 +16,6 @@ export async function loader() {
 export default function TimesheetsPage() {
   const { timesheetsAndEmployees } = useLoaderData();
 
-  console.log({ timesheetsAndEmployees });
-
   return (
     <div className="w-full">
       <TimesheetHeader />

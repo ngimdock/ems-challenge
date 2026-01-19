@@ -32,7 +32,7 @@ import {
 } from "~/components/ui/table";
 import { Link } from "react-router";
 import type { TimesheetWithEmployee } from "./types";
-import { formatDateFR } from "~/lib/utils";
+import { formatDateEN } from "~/lib/utils";
 
 export const columns: ColumnDef<TimesheetWithEmployee>[] = [
   {
@@ -47,7 +47,7 @@ export const columns: ColumnDef<TimesheetWithEmployee>[] = [
     header: "Start Time",
     cell: ({ row }) => (
       <div className="lowercase">
-        {formatDateFR(row.getValue("start_time"))}
+        {formatDateEN(row.getValue("start_time"))}
       </div>
     ),
   },
@@ -55,7 +55,7 @@ export const columns: ColumnDef<TimesheetWithEmployee>[] = [
     accessorKey: "end_time",
     header: "End Time",
     cell: ({ row }) => (
-      <div className="capitalize">{formatDateFR(row.getValue("end_time"))}</div>
+      <div className="capitalize">{formatDateEN(row.getValue("end_time"))}</div>
     ),
   },
   {

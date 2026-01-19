@@ -17,15 +17,15 @@ export function getAvatarPlaceholder(name: string): string {
   return parts[0].slice(0, 2).toUpperCase();
 }
 
-export function formatDateFR(dateString: string): string {
+export function formatDateEN(dateString: string): string {
   if (!dateString) return "";
 
   const date = new Date(dateString);
   if (isNaN(date.getTime())) return "";
 
-  return date.toLocaleDateString("fr-FR", {
-    day: "2-digit",
+  return date.toLocaleDateString("en-US", {
     month: "long",
+    day: "2-digit",
     year: "numeric",
   });
 }
