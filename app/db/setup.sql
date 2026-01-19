@@ -34,8 +34,8 @@ CREATE TABLE employees (
 CREATE TABLE timesheets (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     employee_id INTEGER NOT NULL,
-    start_time DATETIME NOT NULL,
-    end_time DATETIME NOT NULL,
+    start_time DATE NOT NULL,
+    end_time DATE NOT NULL,
     summary TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (employee_id) REFERENCES employees(id)
