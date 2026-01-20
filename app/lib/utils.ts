@@ -6,6 +6,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const DEFAULT_LIMIT = 5;
+export const DEFAULT_OFFSET = 0;
+
+export const LIMIT_KEY = "limit";
+export const OFFSET_KEY = "offset";
 
 export function getAvatarPlaceholder(name: string): string {
   if (!name) return "";

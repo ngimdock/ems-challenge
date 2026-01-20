@@ -16,7 +16,7 @@ export const EmployeeHeader = () => {
       />
 
       <Link to="/employees/new" className="ml-2 inline-block">
-        <Button variant="outline" className="ml-auto">
+        <Button variant="default" className="ml-auto">
           <Plus className="h-4 w-4" /> Create Employee
         </Button>
       </Link>
