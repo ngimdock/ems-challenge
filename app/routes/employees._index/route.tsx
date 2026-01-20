@@ -8,7 +8,6 @@ import {
   LIMIT_KEY,
   OFFSET_KEY,
 } from "~/lib/utils";
-import { PaginateComponent } from "./PaginateComponent";
 import { Paginate } from "./Pagination";
 
 export async function loader({ request }: { request: Request }) {

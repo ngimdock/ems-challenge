@@ -174,4 +174,16 @@ export const fakeTimesheets = [
     end_time: "2025-02-12 16:00:00",
     summary: "Designed timesheet form and integrated validation logic.",
   },
+  {
+    employee_id: 1,
+    start_time: "2025-02-13 09:00:00",
+    end_time: "2025-02-13 18:00:00",
+    summary: "Reviewed financial reports and prepared monthly analysis.",
+  },
+  {
+    employee_id: 3,
+    start_time: "2025-02-14 10:00:00",
+    end_time: "2025-02-14 18:30:00",
+    summary: "Planned product roadmap and coordinated with engineering team.",
+  },
 ];
