@@ -1,4 +1,5 @@
 import { useSearchParams } from "react-router";
+import { Button } from "~/components/ui/button";
 import {
   Pagination,
   PaginationContent,
@@ -38,15 +39,15 @@ export function Paginate({ totalItems, defaultLimit }: PaginateProps) {
   return (
     <Pagination className="flex justify-end mt-4">
       <PaginationContent>
-        {offsetValue > 0 && (
-          <PaginationItem>
+        <PaginationItem>
+          <Button disabled={offsetValue === 0} variant="ghost">
             <PaginationPrevious
               onClick={() =>
                 onPageChange(Math.max(0, offsetValue - limitValue))
               }
             />
-          </PaginationItem>
-        )}
+          </Button>
+        </PaginationItem>
 
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
           <PaginationItem key={page}>
@@ -63,13 +64,23 @@ export function Paginate({ totalItems, defaultLimit }: PaginateProps) {
           </PaginationItem>
         ))}
 
-        {offsetValue + limitValue < totalItems && (
-          <PaginationItem>
+        <PaginationItem>
+          <Button
+            disabled={offsetValue + limitValue >= totalItems}
+            variant="ghost"
+          >
             <PaginationNext
               onClick={() => onPageChange(offsetValue + limitValue)}
             />
-          </PaginationItem>
-        )}
+          </Button>
+          {/* <PaginationNext
+            onClick={() =>
+              onPageChange(
+                Math.min(totalItems - limitValue, offsetValue + limitValue),
+              )
+            }
+          /> */}
+        </PaginationItem>
       </PaginationContent>
     </Pagination>
   );
