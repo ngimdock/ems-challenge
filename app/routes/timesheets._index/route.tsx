@@ -63,8 +63,6 @@ export default function TimesheetsPage() {
     location: event.employee_department,
   }));
 
-  console.log({ timesheetsForTableView, formatedEvents });
-
   return (
     <div className="w-full">
       <Tabs defaultValue="calendar">
