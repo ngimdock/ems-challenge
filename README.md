@@ -18,7 +18,7 @@ The app uses the [**shadcn/ui**](https://ui.shadcn.com/blocks) library for simpl
 - Update existing employee information
 - Display a list of all employees
 - View details of a specific employee
-- Search employees by name or email
+- Search employees by name, email or job title
 - Pagination for employee lists
 
 ### Timesheets
@@ -33,7 +33,7 @@ The app uses the [**shadcn/ui**](https://ui.shadcn.com/blocks) library for simpl
 
 ### Bonus
 
-- Small dashboard summarizing employees and timesheets
+- Small dashboard
 
 ---
 
@@ -42,6 +42,7 @@ The app uses the [**shadcn/ui**](https://ui.shadcn.com/blocks) library for simpl
 To set up and run the application locally:
 
 ```bash
+npm install
 npm run setup_db   # Create the database
 npm run seed       # Seed the database with sample data
 npm run build      # Build the application
