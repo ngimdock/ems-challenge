@@ -1,43 +1,54 @@
-import { Link } from "react-router";
+import { Link, useSearchParams } from "react-router";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import { Plus } from "lucide-react";
-import { useState } from "react";
+import { Delete, Plus, X } from "lucide-react";
+import { useEffect, useState } from "react";
 import { useDebounceFn } from "~/hooks/use-debounde";
 import { SEARCH_KEY } from "~/lib/utils";
 
 export const EmployeeHeader = () => {
-  const [search, setSearch] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchTextParam = searchParams.get(SEARCH_KEY) || "";
+
+  const [searchText, setSearchText] = useState(searchTextParam ?? "");
+
+  const handleReplaceSearchtext = (text: string) => {
+    setSearchParams(text ? { search: text } : {}, { replace: true });
+  };
 
   const handleSetSearchParam = useDebounceFn((value: string) => {
-    const search = typeof window !== "undefined" ? window.location.search : "";
-
-    const params = new URLSearchParams(search);
-
-    params.set(SEARCH_KEY, value);
-
-    window.history.replaceState(
-      {},
-      "",
-      `${window.location.pathname}?${params.toString()}`,
-    );
-
-    window.location.reload();
+    handleReplaceSearchtext(value);
   }, 400);
+
+  useEffect(() => {
+    setSearchText(searchTextParam);
+  }, [searchParams]);
 
   return (
     <div className="flex items-center py-4 justify-between">
-      <Input
-        type="text"
-        placeholder="Filter emails..."
-        value={search}
-        onChange={(event) => {
-          setSearch(event.target.value);
+      <div className="flex items-center gap-2 w-2xl">
+        <Input
+          type="text"
+          placeholder="Filter by name, email, job title"
+          value={searchText}
+          onChange={(event) => {
+            setSearchText(event.target.value);
 
-          handleSetSearchParam(event.target.value);
-        }}
-        className="max-w-sm"
-      />
+            handleSetSearchParam(event.target.value);
+          }}
+          className="max-w-sm"
+        />
+        {searchTextParam && (
+          <Button
+            variant="outline"
+            type="button"
+            onClick={() => handleReplaceSearchtext("")}
+          >
+            <X />
+          </Button>
+        )}
+      </div>
 
       <Link to="/employees/new" className="ml-2 inline-block">
         <Button variant="default" className="ml-auto">

@@ -7,8 +7,10 @@ import {
   DEFAULT_OFFSET,
   LIMIT_KEY,
   OFFSET_KEY,
+  SEARCH_KEY,
 } from "~/lib/utils";
 import { Paginate } from "./Pagination";
+import { findEmployeesQuery } from "./queries";
 
 export async function loader({ request }: { request: Request }) {
   const url = new URL(request.url);
@@ -21,12 +23,27 @@ export async function loader({ request }: { request: Request }) {
     url.searchParams.get(LIMIT_KEY) || DEFAULT_LIMIT.toString(),
   );
 
+  const searchText = url.searchParams.get(SEARCH_KEY);
+
+  const searchPayload = searchText ? `%${searchText}%` : null;
+
   const db = await getDB();
 
-  const employees = await db.all(
-    " SELECT * FROM employees ORDER BY created_at DESC LIMIT ? OFFSET ?;",
-    [limit, offset],
-  );
+  const employees = await db.all(findEmployeesQuery, [
+    searchPayload,
+    searchPayload,
+    searchPayload,
+    searchPayload,
+    limit,
+    offset,
+  ]);
+
+  console.log({
+    offset,
+    limit,
+    searchText,
+    employees,
+  });
 
   const employeeCount = await db.get(
     " SELECT COUNT(*) as count FROM employees;",
