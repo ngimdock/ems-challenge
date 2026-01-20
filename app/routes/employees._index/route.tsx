@@ -3,7 +3,7 @@ import { getDB } from "~/db/getDB";
 import { EmployeeHeader } from "./EmployeeHeader";
 import { EmployeeTable } from "./EmployeeTable";
 import {
-  DEFAULT_LIMIT,
+  DEFAULT_EMPLOYEES_LIMIT,
   DEFAULT_OFFSET,
   LIMIT_KEY,
   OFFSET_KEY,
@@ -20,7 +20,7 @@ export async function loader({ request }: { request: Request }) {
   );
 
   const limit = parseInt(
-    url.searchParams.get(LIMIT_KEY) || DEFAULT_LIMIT.toString(),
+    url.searchParams.get(LIMIT_KEY) || DEFAULT_EMPLOYEES_LIMIT.toString(),
   );
 
   const searchText = url.searchParams.get(SEARCH_KEY);
@@ -38,13 +38,6 @@ export async function loader({ request }: { request: Request }) {
     offset,
   ]);
 
-  console.log({
-    offset,
-    limit,
-    searchText,
-    employees,
-  });
-
   const employeeCount = await db.get(
     " SELECT COUNT(*) as count FROM employees;",
   );
@@ -59,7 +52,10 @@ export default function EmployeesPage() {
     <div className="w-full">
       <EmployeeHeader />
       <EmployeeTable employeesData={employees} />
-      <Paginate totalItems={employeeCount.count} />
+      <Paginate
+        totalItems={employeeCount.count}
+        defaultLimit={DEFAULT_EMPLOYEES_LIMIT}
+      />
     </div>
   );
 }

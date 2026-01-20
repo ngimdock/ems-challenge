@@ -7,25 +7,21 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "~/components/ui/pagination";
-import {
-  DEFAULT_LIMIT,
-  DEFAULT_OFFSET,
-  LIMIT_KEY,
-  OFFSET_KEY,
-} from "~/lib/utils";
+import { DEFAULT_OFFSET, LIMIT_KEY, OFFSET_KEY } from "~/lib/utils";
 
 type PaginateProps = {
   totalItems: number;
+  defaultLimit: number;
 };
 
-export function Paginate({ totalItems }: PaginateProps) {
+export function Paginate({ totalItems, defaultLimit }: PaginateProps) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const offset = searchParams.get(OFFSET_KEY);
   const limit = searchParams.get(LIMIT_KEY);
 
   const offsetValue = parseInt(offset || DEFAULT_OFFSET.toString());
-  const limitValue = parseInt(limit || DEFAULT_LIMIT.toString());
+  const limitValue = parseInt(limit || defaultLimit.toString());
 
   const totalPages = totalItems ? Math.ceil(totalItems / limitValue) : 1;
 
@@ -35,9 +31,7 @@ export function Paginate({ totalItems }: PaginateProps) {
         [OFFSET_KEY]: newPage.toString(),
         [LIMIT_KEY]: limitValue.toString(),
       },
-      {
-        replace: true,
-      },
+      { replace: true },
     );
   }
 

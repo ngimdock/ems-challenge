@@ -3,4 +3,6 @@ export const findAllTimesheetsWithEmployeesQuery = `
   FROM timesheets
   JOIN employees ON timesheets.employee_id = employees.id
   ORDER BY timesheets.created_at DESC
+  LIMIT ?
+  OFFSET ?;
 `;

@@ -5,7 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const DEFAULT_LIMIT = 5;
+export const DEFAULT_EMPLOYEES_LIMIT = 5;
+export const DEFAULT_TIMESHEETS_LIMIT = 3;
 export const DEFAULT_OFFSET = 0;
 
 export const LIMIT_KEY = "limit";

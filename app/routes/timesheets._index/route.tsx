@@ -4,18 +4,41 @@ import { TimesheetTable } from "./TimesheetTable";
 import { TimesheetHeader } from "./TimesheetHeader";
 import { findAllTimesheetsWithEmployeesQuery } from "./queries";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
+import { Paginate } from "../employees._index/Pagination";
+import {
+  DEFAULT_EMPLOYEES_LIMIT,
+  DEFAULT_OFFSET,
+  DEFAULT_TIMESHEETS_LIMIT,
+  LIMIT_KEY,
+  OFFSET_KEY,
+} from "~/lib/utils";
 
-export async function loader() {
+export async function loader({ request }: { request: Request }) {
+  const url = new URL(request.url);
+
+  const offset = parseInt(
+    url.searchParams.get(OFFSET_KEY) || DEFAULT_OFFSET.toString(),
+  );
+
+  const limit = parseInt(
+    url.searchParams.get(LIMIT_KEY) || DEFAULT_TIMESHEETS_LIMIT.toString(),
+  );
+
   const db = await getDB();
   const timesheetsAndEmployees = await db.all(
     findAllTimesheetsWithEmployeesQuery,
+    [limit, offset],
   );
 
-  return { timesheetsAndEmployees };
+  const timesheetsCount = await db.get(
+    " SELECT COUNT(*) as count FROM timesheets;",
+  );
+
+  return { timesheetsAndEmployees, timesheetsCount };
 }
 
 export default function TimesheetsPage() {
-  const { timesheetsAndEmployees } = useLoaderData();
+  const { timesheetsAndEmployees, timesheetsCount } = useLoaderData();
 
   return (
     <div className="w-full">
@@ -30,6 +53,10 @@ export default function TimesheetsPage() {
 
         <TabsContent value="table">
           <TimesheetTable timesheetWithEmployee={timesheetsAndEmployees} />
+          <Paginate
+            totalItems={timesheetsCount.count}
+            defaultLimit={DEFAULT_TIMESHEETS_LIMIT}
+          />
         </TabsContent>
         <TabsContent value="calendar">
           <div>Display calendar to implement</div>
