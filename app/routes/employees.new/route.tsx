@@ -10,6 +10,7 @@ import {
 import { CreateAndUpdateEmployeeForm } from "./CreateAndUpdateEmployeeForm";
 import { getDB } from "~/db/getDB";
 import { createEmployeeQuery } from "./queries";
+import { BackRedirectionComponent } from "~/components/BackRedirectionComponent";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -35,7 +36,8 @@ export const action: ActionFunction = async ({ request }) => {
 export default function NewEmployeePage() {
   return (
     <div>
-      <Card className="w-full sm:max-w-lg mx-auto mt-8">
+      <BackRedirectionComponent text="All Employees" link="/employees" />
+      <Card className="w-full sm:max-w-lg mx-auto mt-3">
         <CardHeader>
           <CardTitle>Create Employee</CardTitle>
           <CardDescription>

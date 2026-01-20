@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router";
 import { getDB } from "~/db/getDB";
 import ProfileSection from "./ProfileSection";
+import { BackRedirectionComponent } from "~/components/BackRedirectionComponent";
 
 export async function loader({ params }: { params: { employeeId: string } }) {
   const db = await getDB();
@@ -17,5 +18,10 @@ export default function EmployeePage() {
 
   if (!employee) return <div>Employee not found</div>;
 
-  return <ProfileSection employee={employee} onEdit={() => {}} />;
+  return (
+    <div>
+      <BackRedirectionComponent text="All Employees" link="/employees" />
+      <ProfileSection employee={employee} onEdit={() => {}} />;
+    </div>
+  );
 }

@@ -11,6 +11,7 @@ import {
 import type { ActionFunction } from "react-router";
 import { updateTimesheetQuery } from "./queries";
 import { CreateAndUpdateTimesheetForm } from "../timesheets.new/CreateAndUpdateTimesheetForm";
+import { BackRedirectionComponent } from "~/components/BackRedirectionComponent";
 
 export const action: ActionFunction = async ({ request }) => {
   const timesheetId = new URL(request.url).pathname.split("/")[2];
@@ -48,6 +49,10 @@ export default function NewTimesheetPage() {
 
   return (
     <div>
+      <BackRedirectionComponent
+        text="Timesheet Details"
+        link={`/employees/${timeSheet.id}`}
+      />
       <Card className="w-full sm:max-w-lg mx-auto mt-8">
         <CardHeader>
           <CardTitle>Update Timesheet</CardTitle>

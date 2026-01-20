@@ -10,6 +10,7 @@ import {
 import { getDB } from "~/db/getDB";
 import { CreateAndUpdateEmployeeForm } from "../employees.new/CreateAndUpdateEmployeeForm";
 import { UpdateEmployeeQuery } from "./queries";
+import { BackRedirectionComponent } from "~/components/BackRedirectionComponent";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
@@ -52,6 +53,10 @@ export default function NewEmployeePage() {
 
   return (
     <div>
+      <BackRedirectionComponent
+        text={employee.full_name + "'s Profile"}
+        link={`/employees/${employee.id}`}
+      />
       <Card className="w-full sm:max-w-lg mx-auto mt-8">
         <CardHeader>
           <CardTitle>Update Employee</CardTitle>

@@ -158,32 +158,32 @@ export const fakeEmployees = [
 export const fakeTimesheets = [
   {
     employee_id: 1,
-    start_time: "2025-02-10 08:00:00",
-    end_time: "2025-02-10 17:00:00",
+    start_time: "2025-02-10",
+    end_time: "2025-02-10",
     summary: "Worked on employee management feature and fixed UI bugs.",
   },
   {
     employee_id: 2,
-    start_time: "2025-02-11 12:00:00",
-    end_time: "2025-02-11 17:00:00",
+    start_time: "2025-02-11",
+    end_time: "2025-02-11",
     summary: "Implemented database migrations and seeded test data.",
   },
   {
     employee_id: 3,
-    start_time: "2025-02-12 07:00:00",
-    end_time: "2025-02-12 16:00:00",
+    start_time: "2025-02-12",
+    end_time: "2025-02-12",
     summary: "Designed timesheet form and integrated validation logic.",
   },
   {
     employee_id: 1,
-    start_time: "2025-02-13 09:00:00",
-    end_time: "2025-02-13 18:00:00",
+    start_time: "2025-02-13",
+    end_time: "2025-02-13",
     summary: "Reviewed financial reports and prepared monthly analysis.",
   },
   {
     employee_id: 3,
-    start_time: "2025-02-14 10:00:00",
-    end_time: "2025-02-14 18:30:00",
+    start_time: "2025-02-14",
+    end_time: "2025-02-14",
     summary: "Planned product roadmap and coordinated with engineering team.",
   },
 ];
