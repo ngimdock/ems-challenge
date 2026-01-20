@@ -1,6 +1,5 @@
-import { redirect, useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 
-import { SectionCards } from "~/components/section-cards";
 import { CustomCard } from "./CustomCard";
 import { getDB } from "~/db/getDB";
 

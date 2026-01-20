@@ -6,7 +6,6 @@ import { findAllTimesheetsWithEmployeesQuery } from "./queries";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
 import { Paginate } from "../employees._index/Pagination";
 import {
-  DEFAULT_EMPLOYEES_LIMIT,
   DEFAULT_OFFSET,
   DEFAULT_TIMESHEETS_LIMIT,
   LIMIT_KEY,

@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from "react-router";
 import { Input } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
-import { Delete, Plus, X } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useDebounceFn } from "~/hooks/use-debounde";
 import { SEARCH_KEY } from "~/lib/utils";
