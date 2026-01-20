@@ -9,7 +9,6 @@ import { Link } from "react-router";
 
 type ProfileSectionProps = {
   employee: EmployeeType;
-  onEdit: () => void;
 };
 
 export default function ProfileSection({ employee }: ProfileSectionProps) {

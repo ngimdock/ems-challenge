@@ -143,7 +143,6 @@ export const columns: ColumnDef<EmployeeType>[] = [
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("salary"));
 
-      // Format the amount as a dollar amount
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "USD",

@@ -14,6 +14,7 @@ type TimesheetDetailsProps = {
 export function TimesheetDetails({ timesheet }: TimesheetDetailsProps) {
   const { employee_name, employee_department, start_time, end_time, summary } =
     timesheet;
+
   return (
     <Card className="max-w-xl mx-auto">
       <CardHeader className="space-y-1">

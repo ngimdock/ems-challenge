@@ -21,7 +21,7 @@ export default function EmployeePage() {
   return (
     <div>
       <BackRedirectionComponent text="All Employees" link="/employees" />
-      <ProfileSection employee={employee} onEdit={() => {}} />;
+      <ProfileSection employee={employee} />;
     </div>
   );
 }

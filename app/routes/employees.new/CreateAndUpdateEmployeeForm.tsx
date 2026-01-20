@@ -15,7 +15,6 @@ type CreateEmployeeFormProps = {
 export function CreateAndUpdateEmployeeForm({
   employee,
 }: CreateEmployeeFormProps) {
-  console.log({ employee });
   return (
     <Form method="post" className="flex  flex-col gap-5 max-w-lg mx-auto">
       <Field>

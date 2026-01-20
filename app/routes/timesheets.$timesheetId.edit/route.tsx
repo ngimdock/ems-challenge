@@ -1,4 +1,4 @@
-import { useLoaderData, Form, redirect } from "react-router";
+import { useLoaderData, redirect } from "react-router";
 import { getDB } from "~/db/getDB";
 import {
   Card,
@@ -46,6 +46,8 @@ export async function loader({ params }: { params: { timesheetId: string } }) {
 
 export default function NewTimesheetPage() {
   const { employees, timeSheet } = useLoaderData();
+
+  if (!timeSheet) return <div>Timesheet not found</div>;
 
   return (
     <div>

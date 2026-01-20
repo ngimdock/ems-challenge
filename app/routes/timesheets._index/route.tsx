@@ -25,6 +25,7 @@ export async function loader({ request }: { request: Request }) {
   );
 
   const db = await getDB();
+
   const timesheetsAndEmployees = await db.all(
     findAllTimesheetsWithEmployeesQuery,
     [limit, offset],

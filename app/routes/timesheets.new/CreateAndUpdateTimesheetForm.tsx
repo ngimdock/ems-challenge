@@ -16,7 +16,6 @@ export function CreateAndUpdateTimesheetForm({
   employees,
   timeSheet,
 }: CreateAndUpdateTimesheetFormProps) {
-  console.log({ timeSheet });
   return (
     <Form method="post" className="flex  flex-col gap-5 max-w-lg mx-auto">
       <Field>

@@ -5,11 +5,6 @@ import { CustomCard } from "./CustomCard";
 import { getDB } from "~/db/getDB";
 
 export async function loader() {
-  // This redirects to the employees page.
-  // If you want to create a home page with navigation buttons
-  // to the employees page, you can remove the redirection.
-  // return redirect("/employees");
-
   const db = await getDB();
 
   const employeesCount = await db.get(

@@ -73,13 +73,6 @@ export function Paginate({ totalItems, defaultLimit }: PaginateProps) {
               onClick={() => onPageChange(offsetValue + limitValue)}
             />
           </Button>
-          {/* <PaginationNext
-            onClick={() =>
-              onPageChange(
-                Math.min(totalItems - limitValue, offsetValue + limitValue),
-              )
-            }
-          /> */}
         </PaginationItem>
       </PaginationContent>
     </Pagination>
