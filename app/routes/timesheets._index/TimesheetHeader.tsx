@@ -5,18 +5,18 @@ import { Plus } from "lucide-react";
 
 export const TimesheetHeader = () => {
   return (
-    <div className="flex items-center py-4 justify-between">
-      <Input
+    <div className="flex items-end py-4 justify-end">
+      {/* <Input
         placeholder="Filter emails..."
-        // value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
-        // onChange={(event: { target: { value: any } }) =>
-        //   table.getColumn("email")?.setFilterValue(event.target.value)
-        // }
+        value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+        onChange={(event: { target: { value: any } }) =>
+          table.getColumn("email")?.setFilterValue(event.target.value)
+        }
         className="max-w-sm"
-      />
+      /> */}
 
       <Link to="/timesheets/new" className="ml-2 inline-block">
-        <Button variant="outline" className="ml-auto">
+        <Button variant="default" className="ml-auto">
           <Plus className="h-4 w-4" /> Create Timesheet
         </Button>
       </Link>

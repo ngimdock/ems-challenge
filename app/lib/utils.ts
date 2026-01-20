@@ -10,6 +10,7 @@ export const DEFAULT_OFFSET = 0;
 
 export const LIMIT_KEY = "limit";
 export const OFFSET_KEY = "offset";
+export const SEARCH_KEY = "search";
 
 export function getAvatarPlaceholder(name: string): string {
   if (!name) return "";

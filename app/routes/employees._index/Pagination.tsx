@@ -43,11 +43,6 @@ export function Paginate({ totalItems }: PaginateProps) {
     window.location.reload();
   }
 
-  console.log({
-    offsetValue,
-    limitValue,
-  });
-
   return (
     <Pagination className="flex justify-end mt-4">
       <PaginationContent>
