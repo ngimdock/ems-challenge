@@ -26,8 +26,8 @@ export const TimesheetCalanderView = ({
 }: TimesheetCalanderViewProps) => {
   const formatedEvents = events.map((event) => ({
     ...event,
-    start: Temporal.PlainDate.from(event.start),
-    end: Temporal.PlainDate.from(event.end),
+    start: Temporal.ZonedDateTime.from(event.start),
+    end: Temporal.ZonedDateTime.from(event.end),
   }));
 
   const eventsService = useState(() => createEventsServicePlugin())[0];
@@ -39,7 +39,22 @@ export const TimesheetCalanderView = ({
       createViewMonthGrid(),
       createViewMonthAgenda(),
     ],
-    events: formatedEvents,
+    events: [
+      ...formatedEvents,
+      // {
+      //   id: 28,
+      //   title: "Coffee with John",
+      //   start: Temporal.ZonedDateTime.from(
+      //     "2026-01-20T19:00:00+01:00[Europe/Berlin]",
+      //   ),
+      //   end: Temporal.ZonedDateTime.from(
+      //     "2026-01-20T20:00:00+01:00[Europe/Berlin]",
+      //   ),
+      //   description:
+      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptas.",
+      //   location: "New York",
+      // },
+    ],
     plugins: [eventsService],
   });
 

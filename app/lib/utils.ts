@@ -1,3 +1,4 @@
+import { DateTime } from "luxon";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -36,4 +37,22 @@ export function formatDateEN(dateString: string): string {
     day: "2-digit",
     year: "numeric",
   });
+}
+
+export function toDatetimeLocal(value?: string) {
+  if (!value) return "";
+
+  return DateTime.fromISO(value).toFormat("yyyy-MM-dd'T'HH:mm");
+}
+
+export function toCanadaDateTime(value: string) {
+  return DateTime.fromISO(value, { zone: "America/Toronto" }).toFormat(
+    "yyyy-MM-dd'T'HH:mm:ssZZ'['z']'",
+  );
+}
+
+export function toBerlinDateTime(value: string) {
+  return DateTime.fromISO(value, { zone: "Europe/Berlin" }).toFormat(
+    "yyyy-MM-dd'T'HH:mm:ssZZ'['z']'",
+  );
 }

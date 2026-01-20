@@ -9,6 +9,7 @@ import {
   DEFAULT_TIMESHEETS_LIMIT,
   LIMIT_KEY,
   OFFSET_KEY,
+  toBerlinDateTime,
 } from "~/lib/utils";
 import { TimesheetCalanderView } from "./TimesheetCalanderView";
 import {
@@ -56,9 +57,13 @@ export default function TimesheetsPage() {
   const formatedEvents = timesheetsForCalendarView.map((event: any) => ({
     id: event.id,
     title: event.employee_name,
-    start: event.start_time,
-    end: event.end_time,
+    start: toBerlinDateTime(event.start_time),
+    end: toBerlinDateTime(event.end_time),
+    description: event.summary,
+    location: event.employee_department,
   }));
+
+  console.log({ timesheetsForTableView, formatedEvents });
 
   return (
     <div className="w-full">

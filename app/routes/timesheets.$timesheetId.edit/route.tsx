@@ -53,7 +53,7 @@ export default function NewTimesheetPage() {
     <div>
       <BackRedirectionComponent
         text="Timesheet Details"
-        link={`/employees/${timeSheet.id}`}
+        link={`/timesheets/${timeSheet.id}`}
       />
       <Card className="w-full sm:max-w-lg mx-auto mt-8">
         <CardHeader>

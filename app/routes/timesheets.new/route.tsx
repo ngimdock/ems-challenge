@@ -12,16 +12,27 @@ import type { ActionFunction } from "react-router";
 import { createTimesheetQuery } from "./queries";
 import { CreateAndUpdateTimesheetForm } from "./CreateAndUpdateTimesheetForm";
 import { BackRedirectionComponent } from "~/components/BackRedirectionComponent";
+// import { toBerlinDateTime, toCanadaDateTime } from "~/lib/utils";
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
 
   const db = await getDB();
 
+  // const startTimeInBerlinTimezone = toBerlinDateTime(
+  //   formData.get("start_time") as string,
+  // );
+
+  // const endTimeInBerlinTimezone = toBerlinDateTime(
+  //   formData.get("end_time") as string,
+  // );
+
   const createTimesheetPayload = [
     formData.get("employee_id"),
     formData.get("start_time"),
     formData.get("end_time"),
+    // startTimeInBerlinTimezone,
+    // endTimeInBerlinTimezone,
     formData.get("summary"),
   ];
 

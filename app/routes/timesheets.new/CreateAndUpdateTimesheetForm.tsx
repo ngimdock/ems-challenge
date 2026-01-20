@@ -41,7 +41,7 @@ export function CreateAndUpdateTimesheetForm({
       <Field>
         <FieldLabel htmlFor="start_time">Start Time</FieldLabel>
         <Input
-          type="date"
+          type="datetime-local"
           id="start_time"
           name="start_time"
           placeholder="1990-01-01"
@@ -54,7 +54,7 @@ export function CreateAndUpdateTimesheetForm({
       <Field>
         <FieldLabel htmlFor="end_time">End Time</FieldLabel>
         <Input
-          type="date"
+          type="datetime-local"
           id="end_time"
           name="end_time"
           placeholder="1990-01-01"
