@@ -19,7 +19,7 @@ import {
 } from "~/lib/utils";
 
 type PaginateProps = {
-  totalItems?: number;
+  totalItems: number;
 };
 
 export function Paginate({ totalItems }: PaginateProps) {
@@ -36,8 +36,8 @@ export function Paginate({ totalItems }: PaginateProps) {
   const totalPages = totalItems ? Math.ceil(totalItems / limitValue) : 1;
 
   function onPageChange(newPage: number) {
-    params.set(LIMIT_KEY, limitValue.toString());
     params.set(OFFSET_KEY, newPage.toString());
+    params.set(LIMIT_KEY, limitValue.toString());
 
     window.history.replaceState(
       {},
@@ -51,45 +51,43 @@ export function Paginate({ totalItems }: PaginateProps) {
   console.log({
     offsetValue,
     limitValue,
-    test: offsetValue === 0,
   });
 
   return (
     <Pagination className="flex justify-end mt-4">
       <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious
-            onClick={() => onPageChange(Math.max(0, offsetValue - limitValue))}
-          />
-        </PaginationItem>
+        {offsetValue > 0 && (
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={() =>
+                onPageChange(Math.max(0, offsetValue - limitValue))
+              }
+            />
+          </PaginationItem>
+        )}
 
         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
           <PaginationItem key={page}>
             <PaginationLink
-              href="#"
-              isActive={page === Math.floor(offsetValue / limitValue) + 1}
+              isActive={
+                page === Math.ceil((offsetValue + limitValue) / limitValue)
+              }
+              onClick={() => {
+                onPageChange((page - 1) * limitValue);
+              }}
             >
               {page}
             </PaginationLink>
           </PaginationItem>
         ))}
-        {totalPages > 3 && (
+
+        {offsetValue + limitValue < totalItems && (
           <PaginationItem>
-            <PaginationEllipsis />
+            <PaginationNext
+              onClick={() => onPageChange(offsetValue + limitValue)}
+            />
           </PaginationItem>
         )}
-        <PaginationItem>
-          <PaginationNext
-            onClick={() =>
-              onPageChange(
-                Math.min(
-                  offsetValue + limitValue,
-                  (totalPages - 1) * limitValue,
-                ),
-              )
-            }
-          />
-        </PaginationItem>
       </PaginationContent>
     </Pagination>
   );
