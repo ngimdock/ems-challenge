@@ -1,3 +1,4 @@
+import { useSearchParams } from "react-router";
 import {
   Pagination,
   PaginationContent,
@@ -18,12 +19,10 @@ type PaginateProps = {
 };
 
 export function Paginate({ totalItems }: PaginateProps) {
-  const search = typeof window !== "undefined" ? window.location.search : "";
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const params = new URLSearchParams(search);
-
-  const offset = params.get(OFFSET_KEY);
-  const limit = params.get(LIMIT_KEY);
+  const offset = searchParams.get(OFFSET_KEY);
+  const limit = searchParams.get(LIMIT_KEY);
 
   const offsetValue = parseInt(offset || DEFAULT_OFFSET.toString());
   const limitValue = parseInt(limit || DEFAULT_LIMIT.toString());
@@ -31,16 +30,15 @@ export function Paginate({ totalItems }: PaginateProps) {
   const totalPages = totalItems ? Math.ceil(totalItems / limitValue) : 1;
 
   function onPageChange(newPage: number) {
-    params.set(OFFSET_KEY, newPage.toString());
-    params.set(LIMIT_KEY, limitValue.toString());
-
-    window.history.replaceState(
-      {},
-      "",
-      `${window.location.pathname}?${params.toString()}`,
+    setSearchParams(
+      {
+        [OFFSET_KEY]: newPage.toString(),
+        [LIMIT_KEY]: limitValue.toString(),
+      },
+      {
+        replace: true,
+      },
     );
-
-    window.location.reload();
   }
 
   return (
