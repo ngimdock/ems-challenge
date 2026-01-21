@@ -39,22 +39,7 @@ export const TimesheetCalanderView = ({
       createViewMonthGrid(),
       createViewMonthAgenda(),
     ],
-    events: [
-      ...formatedEvents,
-      // {
-      //   id: 28,
-      //   title: "Coffee with John",
-      //   start: Temporal.ZonedDateTime.from(
-      //     "2026-01-20T19:00:00+01:00[Europe/Berlin]",
-      //   ),
-      //   end: Temporal.ZonedDateTime.from(
-      //     "2026-01-20T20:00:00+01:00[Europe/Berlin]",
-      //   ),
-      //   description:
-      //     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, voluptas.",
-      //   location: "New York",
-      // },
-    ],
+    events: [...formatedEvents],
     plugins: [eventsService],
   });
 
